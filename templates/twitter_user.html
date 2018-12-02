@@ -1,0 +1,66 @@
+<h3 align="center">
+	Total  User Count: {{crm_users_count}}
+</h3>
+
+<div class="container" style="padding-bottom:40px">
+
+		<table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Job</th>
+                <th>City</th>
+                <th>Age</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+        	{% for crm_user in crm_users %}
+            <tr>
+                <td>
+                	<div class="hover_img">
+					    <a href="/home/{{ crm_user['id'] }}">{{ crm_user['name'] }}<span><img src="{{ (crm_user['pictureURL'][:4] + crm_user['pictureURL'][5:]).replace('normal', '400x400') }}" alt="image" height="100" /></span></a>
+					</div>
+				</td>
+                <td>{{ crm_user['jobTitle'] }}</td>
+                <td>{{ crm_user['city'] }}</td>
+                <td>{{ crm_user['age'] }}</td>
+                <td>{{ crm_user['createdAt'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Job</th>
+                <th>City</th>
+                <th>Age</th>
+                <th>Created At</th>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
+
+<!-- 
+
+	{% for crm_user in crm_users %}
+
+		<div class="twitter_user_card">
+			<a href = "/home/{{crm_user['id']}}" rel="noopener">
+				<div class="bg" style="background-image:url({{ crm_user['backgroundImg'] }})"></div>
+				<div class="pp" align="center">
+					<img src="{{ (crm_user['pictureURL'][:4] + crm_user['pictureURL'][5:]).replace('normal', '400x400') }}" alt=""/>
+				</div>
+				<div class="details">
+					<span id="name">{{ crm_user['name'] }}</span>
+					<span id="job"> {{ crm_user['jobTitle'] }} </span></a>
+					<span id="city">{{ crm_user['city'] }}</span>
+					<span id="description">{{ crm_user['createdAt'] }}</span>
+					</div>
+        </a>
+    </div>
+    
+    {% endfor %}
+-->
+

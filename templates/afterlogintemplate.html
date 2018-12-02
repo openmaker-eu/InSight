@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" wp-site wp-site-is-master-page>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{{ title }}</title>
+
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/starter-template.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+
+    <style type="text/css">
+        .form-alert form .input-error {
+            border-color: #de615e;
+        }
+
+        .bootstrap-tagsinput {
+            width: 100%;
+        }
+
+        .bootstrap-tagsinput input {
+            width: 100%;
+        }
+
+        select {
+            overflow: auto;
+        }
+
+        .img-circle {
+            border-radius: 50%;
+        }
+    </style>
+
+    {% if type == "home" %}
+    <link rel="stylesheet" type="text/css" href="/css/twitter_user_card.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        .hover_img a { position:relative; }
+        .hover_img a span { position:absolute; display:none; z-index:99; }
+        .hover_img a:hover span { display:block; }
+    </style>
+    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    {% endif %}
+
+    {% if type == "profile" %}
+    <style type="text/css">
+      @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css");
+
+      .spinner {
+        display: inline-block;
+        opacity: 0;
+        max-width: 0;
+
+        -webkit-transition: opacity 0.25s, max-width 0.45s;
+        -moz-transition: opacity 0.25s, max-width 0.45s;
+        -o-transition: opacity 0.25s, max-width 0.45s;
+        transition: opacity 0.25s, max-width 0.45s;
+        /* Duration fixed since we animate additional hidden width */
+      }
+
+      .has-spinner.active {
+        cursor: progress;
+      }
+
+      .has-spinner.active .spinner {
+        opacity: 1;
+        max-width: 50px;
+        /* More than it will ever come, notice that this affects on animation duration */
+      }
+    </style>
+    {% endif %}
+
+    {% if type == "network" %}
+    <style type="text/css">
+        .nav-tabs.centered > li, .nav-pills.centered > li {
+        float:none;
+        display:inline-block;
+        *display:inline; /* ie7 fix */
+         zoom:1; /* hasLayout ie7 trigger */
+        }
+
+        .nav-tabs.centered, .nav-pills.centered {
+            text-align:center;
+    }
+    </style>
+    {% endif %}
+
+    {% if type == "crm_user_analytics" %}
+        <style type="text/css"> 
+            .nav-tabs.centered > li, .nav-pills.centered > li {
+        float:none;
+        display:inline-block;
+        *display:inline; /* ie7 fix */
+         zoom:1; /* hasLayout ie7 trigger */
+        }
+
+        .nav-tabs.centered, .nav-pills.centered {
+            text-align:center;
+        }
+        </style>
+    {% endif %}
+<!--    
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+        .card {
+            padding-top: 20px;
+            margin: 10px 0 20px 0;
+            background-color: rgba(214, 224, 226, 0.2);
+            border-top-width: 0;
+            border-bottom-width: 2px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .card .card-heading {
+            padding: 0 20px;
+            margin: 0;
+        }
+
+        .card .card-heading.simple {
+            font-size: 20px;
+            font-weight: 300;
+            color: #777;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .card .card-heading.image img {
+            display: inline-block;
+            width: 46px;
+            height: 46px;
+            margin-right: 15px;
+            vertical-align: top;
+            border: 0;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+        .card .card-heading.image .card-heading-header {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .card .card-heading.image .card-heading-header h3 {
+            margin: 0;
+            font-size: 14px;
+            line-height: 16px;
+            color: #262626;
+        }
+
+        .card .card-heading.image .card-heading-header span {
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .card .card-body {
+            padding: 0 20px;
+            margin-top: 20px;
+        }
+
+        .card .card-media {
+            padding: 0 20px;
+            margin: 0 -14px;
+        }
+
+        .card .card-media img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .card .card-actions {
+            min-height: 30px;
+            padding: 0 20px 20px 20px;
+            margin: 20px 0 0 0;
+        }
+
+        .card .card-comments {
+            padding: 20px;
+            margin: 0;
+            background-color: #f8f8f8;
+        }
+
+        .card .card-comments .comments-collapse-toggle {
+            padding: 0;
+            margin: 0 20px 12px 20px;
+        }
+
+        .card .card-comments .comments-collapse-toggle a,
+        .card .card-comments .comments-collapse-toggle span {
+            padding-right: 5px;
+            overflow: hidden;
+            font-size: 12px;
+            color: #999;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .card-comments .media-heading {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .card.people {
+            position: relative;
+            display: inline-block;
+            width: 170px;
+            height: 300px;
+            padding-top: 0;
+            margin-left: 20px;
+            overflow: hidden;
+            vertical-align: top;
+        }
+
+        .card.people:first-child {
+            margin-left: 0;
+        }
+
+        .card.people .card-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: inline-block;
+            width: 170px;
+            height: 150px;
+            background-color: #ffffff;
+        }
+
+        .card.people .card-top.green {
+            background-color: #53a93f;
+        }
+
+        .card.people .card-top.blue {
+            background-color: #427fed;
+        }
+
+        .card.people .card-info {
+            position: absolute;
+            top: 150px;
+            display: inline-block;
+            width: 100%;
+            height: 101px;
+            overflow: hidden;
+            background: #ffffff;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .card.people .card-info .title {
+            display: block;
+            margin: 8px 14px 0 14px;
+            overflow: hidden;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 18px;
+            color: #404040;
+        }
+
+        .card.people .card-info .desc {
+            display: block;
+            margin: 8px 14px 0 14px;
+            overflow: hidden;
+            font-size: 12px;
+            line-height: 16px;
+            color: #737373;
+            text-overflow: ellipsis;
+        }
+
+        .card.people .card-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: inline-block;
+            width: 100%;
+            padding: 10px 20px;
+            line-height: 29px;
+            text-align: center;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .card.hovercard {
+            position: relative;
+            padding-top: 0;
+            overflow: hidden;
+            text-align: center;
+            background-color: rgba(214, 224, 226, 0.2);
+        }
+
+        .card.hovercard .cardheader {
+            background: url("http://lorempixel.com/850/280/nature/4/");
+            background-size: cover;
+            height: 135px;
+        }
+
+        .card.hovercard .avatar {
+            position: relative;
+            top: -50px;
+            margin-bottom: -50px;
+        }
+
+        .card.hovercard .avatar img {
+            width: 100px;
+            height: 100px;
+            max-width: 100px;
+            max-height: 100px;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            border: 5px solid rgba(255,255,255,0.5);
+        }
+
+        .card.hovercard .info {
+            padding: 4px 8px 10px;
+        }
+
+        .card.hovercard .info .title {
+            margin-bottom: 4px;
+            font-size: 24px;
+            line-height: 1;
+            color: #262626;
+            vertical-align: middle;
+        }
+
+        .card.hovercard .info .desc {
+            overflow: hidden;
+            font-size: 12px;
+            line-height: 20px;
+            color: #737373;
+            text-overflow: ellipsis;
+        }
+
+        .card.hovercard .bottom {
+            padding: 0 20px;
+            margin-bottom: 17px;
+        }
+
+        .btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }
+
+ -->
+
+
+</head>
+
+<body style="padding-top:50px">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/home" class="navbar-brand">Insight<br></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li {% if type=="home" %} class="active" {% endif %}>
+                    <a href="/home">Profiles</a>
+                </li>
+                <li>
+                    <a href="/network">Network</a>
+                </li>
+                <li {% if type=="bookmark" %} class="active" {% endif %} class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+                            class="glyphicon glyphicon-user"></span> {{ username }}
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/profile">My Profile</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+{% if type == "home" %}
+    {% include 'twitter_user.html' %}
+{% endif %}
+{% if type == "profile" %}
+    {% include 'profile.html' %}
+{% endif %}
+{% if type == "crm_user_analytics" %}
+    {% include 'crm_user_analytics.html' %}
+{% endif %}
+{% if type == "network" %}
+    {% include 'network.html' %}
+{% endif %}
+<!-- /.container -->
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/js/ie10-viewport-bug-workaround.js"></script>
+
+
+{% if type == "home" %}
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+</script>
+{% endif %}
+
+
+{% if type == "profile" %}
+<script src="/js/jquery-1.11.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/js/profile.js"></script>
+{% endif %}
+
+<!-- {% if type == "crm_user_analytics" %}
+<script src="/js/jquery-1.11.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/js/profile.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+{% endif %}
+ -->
+
+{% if type == "network" %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ {% endif %}
+
+
+</body>
+
+</html>

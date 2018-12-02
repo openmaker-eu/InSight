@@ -1,0 +1,195 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+
+<div class="container" style="padding-bottom:40px">
+  <center><h2>Information about CRM User</h2></center>
+
+  <ul class="nav nav-tabs centered">
+    <li class="active"><a data-toggle="tab" href="#home">CRM User Profile</a></li>
+    <li><a data-toggle="tab" href="#menu1">Twitter Profile</a></li>
+    <li><a data-toggle="tab" href="#menu2">Follower Graph</a></li>
+    <li><a data-toggle="tab" href="#menu3">Recommended News</a></li>
+    <li><a data-toggle="tab" href="#menu4">Recommended Events</a></li>
+    <li><a data-toggle="tab" href="#menu5">Recommended Users</a></li>
+  </ul>
+
+<div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+        <h3>CRM User Profile Information</h3>
+
+
+        <span><b>Name and Surname:</b> {{ crm_profile['name'] }}</span> <br>
+        <span><b>Job:</b> {{ crm_profile['jobTitle'] }}</span> <br>
+        <span><b>Location:</b> {{ crm_profile['city'] }}</span> <br>
+        <span><b>Created At:</b> {{ crm_profile['createdAt'] }}</span> <br>
+        <span><b>Address:</b> {{ crm_profile['address'] }}</span> <br>
+        <span><b>Web site URL:</b> {{ crm_profile['websiteUrl'] }}</span> <br>
+        <span><b>Tags:</b> 
+            <ul>
+            {% for tag in crm_profile['tags'] %}
+                <li>{{tag['name']}}</li> 
+            {% endfor %}
+            </ul>
+        </span>
+        <span><b>Topics:</b>
+            <ul>
+            {% for topic in user_topics %}
+                <li>
+                {% if user_topics[topic]['interest'] > 0 %}
+                <b>
+                {% endif %}
+                {{topic}}: {{user_topics[topic]['interest']}}</b></li> 
+            {% endfor %}
+            </ul>
+        </span> <br>
+    </div>
+
+    {% if twitter_id != -1 %}
+    <div id="menu1" class="tab-pane fade">
+        <h3>Twitter Profile Information</h3>
+
+        <div class="margin-bottom-15">
+            <div class="col-md-3">
+                <a href="https://twitter.com/{{ twitter_profile['screen_name'] }}"><img src="{{ twitter_profile['profile_image_url'] }}" class="img-responsive feed_img" height="100" width="100"></a>
+            </div>
+            <div class="col-md-9">
+                <span> <b>Screen Name:</b> {{ twitter_profile['screen_name'] }}</span> <br>
+                <span> <b>Location:</b> {{ twitter_profile['location'] }}</span> <br>
+                <span> <b>Followers Count:</b> {{ twitter_profile['followers_count'] }}</span> <br>
+                <span> <b>Friends Count:</b> {{ twitter_profile['friends_count'] }}</span> <br>
+                <span> <b>Language:</b> {{ twitter_profile['lang'] }}</span> <br>
+                <span> <b>Description:</b> {{ twitter_profile['description'] }}</span> <br>
+
+            </div>
+
+            <div class="col-md-12 margin-top-15">
+                <hr>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if graph != -1 %}
+    <div id="menu2" class="tab-pane fade">
+        <h3>Follower Graph</h3>
+            {{graph}}
+    </div>
+    {% endif %}
+
+
+{% if all_news != -1 %}
+    <div id="menu3" class="tab-pane fade">
+        <h3>Recommended News for the User</h3>
+        {% for news in all_news %}
+            <div class="margin-bottom-15">
+                    <div class="col-md-3">
+                        <img src="{{ news['im'] }}" class="img-responsive feed_img">
+                    </div>
+                    <div class="col-md-9">
+                        <p></p>
+                        <h4 style="margin-bottom:4px;">
+                            <a href="{{ news['url'] }}" target="_blank" style="color: #000000;text-decoration: none;"><span> <strong>{{ news['title'] }}</strong></span></a>
+                        </h4>
+                        <a style="margin-bottom:3px;color:#666666;text-decoration: none;" href="http://{{ news['source'] }}" target="_blank">{{ news['source'] }}</a><br>
+                        <p style="margin-top:-3px">
+                            <small> {{ news['published_at'] }} </small>
+                        </p>
+                        <p></p>
+                        <p>
+                        </p>
+                        <p>{{ news['summary'] }}</p>
+                        <p></p>
+
+                        <p><span> <b>Keywords:</b> {{ news['keywords'] }}</span></p>
+                        <p><span> <b>Popularity:</b> {{ news['popularity'] }}</span></p>
+                        <p><span> <b>Topic:</b> {{ news['topic_name'] }}</span></p>
+                        <br>
+
+                </div>
+
+            <div class="col-md-12 margin-top-15">
+                <hr>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    
+{% endif %}
+
+
+
+{% if all_events != -1 %}
+    <div id="menu4" class="tab-pane fade">
+        <h3>Recommended Events for the User</h3>
+        {% for event in all_events %}
+            <div class="margin-bottom-15">
+                    <div class="col-md-3">
+                        <img src="{{ event['cover'] }}" class="img-responsive feed_img">
+                    </div>
+                    <div class="col-md-9">
+                        <p></p>
+                        <h4 style="margin-bottom:4px;">
+                            <a href="{{ event['link'] }}" target="_blank" style="color: #000000;text-decoration: none;"><span> <strong>{{ event['name'] }}</strong></span></a>
+                        </h4>
+                        <a style="margin-bottom:3px;color:#666666;text-decoration: none;" href="{{ event['link'] }}" target="_blank">{{ event['link']  }}</a><br>
+                        <p></p>
+                        <p><span> <b>Place:</b> {{ event['place'] }}</span></p>
+                        <p><span> <b>Start Time:</b> {{ event['start_time'][:-10] }}</span></p>
+                        <p><span> <b>End Time:</b> {{ event['end_time'][:-10] }}</span></p>
+                        <p><span> <b>Topic:</b> {{ event['topic_name'] }}</span></p>
+                        <br>
+
+                </div>
+
+            <div class="col-md-12 margin-top-15">
+                <hr>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    
+{% endif %}
+
+
+
+{% if all_recommended_users != -1 %}
+    <div id="menu5" class="tab-pane fade">
+        <h3>Recommended Users for the User</h3>
+        {% for recommended_user in all_recommended_users %}
+            <div class="margin-bottom-15">
+                    <div class="col-md-3">
+                        {% if recommended_user['twitter_id'] != -1 %}
+                            <a href="https://twitter.com/{{ recommended_user['twitter_profile']['screen_name'] }}"><img src="{{ recommended_user['twitter_profile']['profile_image_url'] }}" class="img-responsive feed_img" height="100" width="100"></a>
+                        {% endif %}
+                        {% if recommended_user['twitter_id'] == -1 %}
+                            <img src="{{ recommended_user['capsule_profile']['pictureURL'] }}" class="img-responsive feed_img" height="100" width="100">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-9">
+                        <span><b>Name and Surname:</b> {{ recommended_user['capsule_profile']['name'] }}</span> <br>
+                        <span><b>Job:</b> {{ recommended_user['capsule_profile']['jobTitle'] }}</span> <br>
+                        <span><b>Location:</b> {{ recommended_user['capsule_profile']['city'] }}</span> <br>
+                        <span><b>Created At:</b> {{ recommended_user['capsule_profile']['createdAt'] }}</span> <br>
+                        <span><b>Address:</b> {{ recommended_user['capsule_profile']['address'] }}</span> <br>
+                        <span><b>Web site URL:</b> {{ recommended_user['capsule_profile']['website_url'] }}</span> <br>
+
+                </div>
+
+            <div class="col-md-12 margin-top-15">
+                <hr>
+            </div>
+        </div>
+    {% endfor %}
+
+    <br><br><br>
+    <div>Robot Head icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    </div>
+    
+{% endif %}
+
+  </div>
+</div>

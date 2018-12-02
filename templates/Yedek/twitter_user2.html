@@ -1,0 +1,38 @@
+<h3 align="center">
+	Total  User Count: {{twitter_users_count}}
+</h3>
+
+<div class="container" style="padding-bottom:40px">
+	<div class="wrapper grid" id="audiencewrapper">
+		{% for twitter_user in twitter_users %}
+
+		<div class="twitter_user_card">
+			<a href = "/home/{{twitter_user['id_str']}}" rel="noopener">
+				<div class="bg" style="background-image:url({{ twitter_user['profile_banner_url'] }})"></div>
+				<div class="pp" align="center">
+					<img src="{{ (twitter_user['profile_image_url_https'][:4] + twitter_user['profile_image_url_https'][5:]).replace('normal', '400x400') }}" alt=""/>
+				</div>
+				<div class="details">
+					<span id="name">{{ twitter_user['name'] }}</span>
+					<a href="http://twitter.com/{{ twitter_user['screen_name'] }}" target="_blank"><span
+						id="nick"> @{{ twitter_user['screen_name'] }} </span></a>
+						<span id="description">{{ twitter_user['description'] }}</span>
+						<ul>
+							<li>Tweets <span>{{ twitter_user['statuses_count'] }}</span></li>
+							<li>Follow <span>{{ twitter_user['friends_count'] }}</span></li>
+							<li>Followers <span>{{ twitter_user['followers_count'] }}</span></li>
+						</ul>
+					</div>
+
+            <!-- <div class="vote_twitter_user" style="font-size:0.7em;text-align:right">
+                <input id="rate_{{ twitter_user['id'] }}" data-show-caption="false" onchange="rateAudience('{{ twitter_user['id'] }}')" class="rating rating-loading" data-size="xs" data-min="0" data-max="5" data-step="0.5" value="{{ twitter_user['rate'] }}">
+            </div> -->
+        </a>
+    </div>
+    
+    {% endfor %}
+
+
+</div>
+</div>
+

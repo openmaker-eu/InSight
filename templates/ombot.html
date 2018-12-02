@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{{ title }}</title>
+</head>
+
+<body>
+	<h1> Article Summary </h1>
+	<p> {{ art_summary }} </p>
+
+	<p> <a href="{{ art_url }}"> Article Link </a> </p>
+	
+	<h1> Article  Question</h1>
+	<p> {{ t }} </p>
+
+	<p> <strong> {{ q }} </strong> </p>
+
+	<form action="/ombot_choice"  method="get">
+	  <input type="radio" name="choice" value={{ a1 }} checked> {{ a1 }}  
+	  <input type="radio" name="choice" value={{ a2 }}> {{ a2 }}  
+	  <input type="radio" name="choice" value={{ a3 }}> {{ a3 }} <br><br>
+	  <input type="hidden" name="sid" value={{ sid }} />
+	  <input type="hidden" name="userID" value={{uid}} />
+	  <input type="hidden" name="topic_names" value={{tnames}} />
+	  <input type="submit" value="Submit">
+	</form> 
+
+
+	<form action="http://127.0.0.1:8484/demonstrate_OMBot_interaction" method="get">
+		<input type="hidden" name="userID" value={{uid}} />
+		<input type="hidden" name="topic_names" value={{tnames}} />
+		<input type="submit" value="Skip Question" />
+	</form>
+
+</body>
+
+</html>
